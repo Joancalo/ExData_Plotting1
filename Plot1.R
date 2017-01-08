@@ -1,0 +1,22 @@
+#after downloading the file to your working directory 
+house_power <- read.csv("household_power_consumption.txt", sep = ";")
+feb1 <- subset(house_power, house_power$Date=="1/2/2007")
+feb2 <- subset(house_power, house_power$Date=="2/2/2007")
+feb <- rbind(feb1, feb2)
+feb$Global_active_power <- as.numeric(as.character(feb$Global_active_power))
+feb$Global_reactive_power <- as.numeric(as.character(feb$Global_reactive_power))
+feb$Voltage <- as.numeric(as.character(feb$Voltage))
+feb$Global_intensity <- as.numeric(as.character(feb$Global_intensity))
+feb$Sub_metering_1 <- as.numeric(as.character(feb$Sub_metering_1))
+feb$Sub_metering_2 <- as.numeric(as.character(feb$Sub_metering_2))
+feb$Sub_metering_3 <- as.numeric(as.character(feb$Sub_metering_3))
+feb$Date <- as.character(feb$Date)
+feb$Time <- as.character(feb$Time)
+feb$Date_time <- paste(feb$Date, feb$Time, sep = " ")
+library("lubridate")
+feb$Date_time <- strptime(feb$Date_time, format = "%d/%m/%Y %H:%M:%S")
+feb$Date <- dmy(feb$Date)
+feb$Time <- hms(feb$Time)
+#plot 1
+hist(feb$Global_active_power, col = "red", xlab = "Global active power (Kilowatts)", 
+breaks = 12, main = "Global Active Power")
