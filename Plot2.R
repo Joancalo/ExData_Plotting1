@@ -17,6 +17,7 @@ library("lubridate")
 feb$Date_time <- strptime(feb$Date_time, format = "%d/%m/%Y %H:%M:%S")
 feb$Date <- dmy(feb$Date)
 feb$Time <- hms(feb$Time)
-#plot 1
-hist(feb$Global_active_power, col = "red", xlab = "Global active power (Kilowatts)", 
-     breaks = 12, main = "Global Active Power")
+#plot 2
+plot(feb$Date_time, feb$Global_active_power, ylab = "Global Active Power (kilowatts)", 
+     xlab = "", type="n")
+lines(feb$Date_time, feb$Global_active_power)
